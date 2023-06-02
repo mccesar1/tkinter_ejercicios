@@ -4,6 +4,7 @@ from tkinter import ttk
 
 import sqlite3
 from tkinter import messagebox 
+from serial import Serial
 
 class Product:
 
@@ -28,9 +29,9 @@ class Product:
         self.price.grid(row=2, column=1, padx=10, pady=10)
 
         #btn agregar producto
-        Button(frame, text='Agregar Producto', command=self.add_product).grid(row=3, columnspan=2, padx=10, pady=10)
+        ttk.Button(frame, text='Agregar Producto', command=self.add_product).grid(row=5,column=0, sticky=W+E)
         #btn eliminar producto
-        Button(frame, text='Eliminar Producto', command=self.delete_product).grid(row=4, columnspan=2, padx=10, pady=10)
+        ttk.Button(frame, text='Eliminar Producto', command=self.delete_product).grid(row=5,column=1, sticky=W+E)
 
 
         #table
@@ -47,6 +48,7 @@ class Product:
         result = cursor.execute(query, parameters)
         conn.commit()
         return result
+    
     
     def get_products(self):
         #cleaning table
@@ -76,12 +78,16 @@ class Product:
         self.name.focus()
     
     def delete_product(self):
-        self.tree.delete(self.tree.selection())
+        self.tree.item(self.tree.selection())
         query = 'DELETE FROM product WHERE name = ?'
         parameters = (self.name.get(),)
         self.conexion(query, parameters)
         self.get_products()
         messagebox.showinfo('Producto eliminado', 'El producto ha sido eliminado')
+
+        
+        
+
 
 if __name__ == '__main__':
      window = Tk()

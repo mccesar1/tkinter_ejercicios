@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Examen</title>
+</head>
+<body>
+<h1>Contratos Info</h1>
+    {% for contrato in contratos %}
+        <h1>{{contrato.cliente.nombre}}</h1>
+        <h1>{{contrato.cliente.direccion}}</h1>
+        <h1>{{contrato.automovil.marca}}</h1>
+        <h1>{{contrato.automovil.modelo}}</h1>
+
+    {% endfor %}
+</body>
+</html>
